@@ -28,7 +28,6 @@ router.get('/getqna', async (req, res) => {
     try {
         // const qnas = await Qna.find().sort({_id:-1}).skip(10).limit(10)
         const qnas = await Qna.find().sort({_id:-1})
-        console.log(qnas);
         res.json({success: true, response: qnas})
 
     } catch (error) {

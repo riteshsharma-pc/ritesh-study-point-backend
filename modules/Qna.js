@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const qnaSchema = new Schema({
     course: { type: String, required: true },
-    course: { type: String, required: true },
+    sem: {type: Number, required: true},
     subjectCode: { type: Number, required: true },
     unit: { type: Number, required: true },
     question: { type: String, required: true },

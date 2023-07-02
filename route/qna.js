@@ -45,7 +45,7 @@ router.put('/updateqna', [
     body('answer').isString()
 ], async (req, res) => {
     try {
-        const {_id, course, sem, subjectCode, unit, question, imp, ytLink, answer } = req.body;
+        const { _id, course, sem, subjectCode, unit, question, imp, ytLink, answer } = req.body;
         const errors = validationResult(req);
         if (!errors.isEmpty()) return res.status(400).json({ success: false, errors: errors.array()[0].msg });
 
@@ -64,6 +64,19 @@ router.put('/updateqna', [
         qna = await Qna.findByIdAndUpdate(_id, { $set: updatedQna }, { new: true })
         res.json({ success: true, response: qna })
 
+    } catch (error) {
+        console.error(error.msg)
+        res.status(500).json({ success: false, response: error.message })
+    }
+})
+
+router.delete('/deleteqna/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        let qna = await Qna.findById(id);
+        if (!qna) return res.status(404).json({ success: false, response: "Qna not found" })
+        qna = await Qna.findByIdAndDelete(id)
+        res.json({success: true, response: qna})
     } catch (error) {
         console.error(error.msg)
         res.status(500).json({ success: false, response: error.message })

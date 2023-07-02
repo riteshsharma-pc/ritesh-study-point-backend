@@ -47,7 +47,6 @@ router.put('/updateqna', [
     try {
         const {_id, course, sem, subjectCode, unit, question, imp, ytLink, answer } = req.body;
         const errors = validationResult(req);
-        console.log(errors);
         if (!errors.isEmpty()) return res.status(400).json({ success: false, errors: errors.array()[0].msg });
 
         const updatedQna = {
